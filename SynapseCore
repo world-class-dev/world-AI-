@@ -1,0 +1,85 @@
+synapse-core-repo/
+├── .github/
+│   └── workflows/
+│       └── ci_cd_pipeline.yml          # Continuous Integration/Deployment
+├── docs/
+│   └── architecture/
+│       └── synapse_blueprint.md        # Maelezo ya usanifu wa TTCL/Contabo
+├── services/
+│   ├── synapse_auth/
+│   │   ├── src/
+│   │   │   ├── core/
+│   │   │   │   ├── vpn_handler.rs      # VPN (RADIUS) AUTH LOGIC
+│   │   │   │   └── jwt_issuer.rs       # SYNAPSE_JWT ISSUER
+│   │   │   └── main.rs
+│   │   └── Cargo.toml
+│   │
+│   ├── synapse_billing/
+│   │   ├── src/
+│   │   │   ├── core/
+│   │   │   │   ├── usage_tracker.rs    # VPN ACCOUNTING & DATA TRACKER
+│   │   │   │   └── rate_limiter.rs     # QUALITY OF SERVICE ENFORCER
+│   │   │   └── main.rs
+│   │   └── Cargo.toml
+│   │
+│   ├── synapse_router/
+│   │   ├── src/
+│   │   │   ├── core/
+│   │   │   │   └── director.rs         # GLOBAL ROUTING & FAILOVER LOGIC
+│   │   │   ├── middleware/
+│   │   │   │   └── jwt_validator.rs    # ZERO-TRUST VALIDATION
+│   │   │   └── main.rs
+│   │   └── Cargo.toml
+│   │
+│   ├── synapse_schemer/
+│   │   ├── src/
+│   │   │   ├── core/
+│   │   │   │   ├── connector.rs        # DB FLEXIBILITY (Multi-DB Connector)
+│   │   │   │   └── sanitizer.rs        # SQL INJECTION GUARDRAIL
+│   │   │   └── main.rs
+│   │   └── Cargo.toml
+│   │
+│   ├── synapse_cache/
+│   │   ├── src/
+│   │   │   ├── core/
+│   │   │   │   ├── cache_store.rs      # HIGH-PERFORMANCE CACHE LOGIC
+│   │   │   │   └── vector_cache.rs     # VECTOR CACHING LOGIC
+│   │   │   └── main.rs
+│   │   └── Cargo.toml
+│   │
+│   ├── synapse_ai_hub/                 # PYTHON SERVICE
+│   │   ├── src/
+│   │   │   ├── llm/
+│   │   │   │   └── inference.py
+│   │   │   ├── ai/
+│   │   │   │   ├── vector_processor.py # VECTOR INDEXING & EMBEDDING
+│   │   │   │   └── ai_actions.py       # SMS/EMAIL GENERATION LOGIC
+│   │   │   └── main.py
+│   │   └── requirements.txt
+│   │
+│   ├── synapse_risk_hub/               # PYTHON SERVICE
+│   │   └── ...
+│   │
+│   └── synapse_deploy_agent/
+│       ├── src/
+│       │   ├── core/
+│       │   │   ├── health_checker.rs   # HEALTH & UPTIME MONITORING
+│       │   │   └── wireguard_manager.rs # WIREGUARD CONFIG MANAGEMENT
+│       │   └── main.rs
+│       └── Cargo.toml
+│
+├── shared_libs/
+│   ├── synapse_models/                 # RUST CRATE
+│   │   └── src/lib.rs                  # Synapse_JWT Structs, Data Models
+│   └── synapse_s2s_client/             # RUST CRATE
+│       └── src/lib.rs                  # S2S HTTP Client with Zero-Trust Tokens
+│
+├── deployment/
+│   ├── synapse-os.yml                  # GLOBAL DEPLOYMENT FILE (TTCL/Contabo Configs)
+│   ├── vpn_config_generator/
+│   │   └── generate_conf.py            # Script ya kuunda WireGuard .conf files
+│   ├── docker-compose.yml
+│   └── Dockerfile.base
+└── infrastructure/
+    ├── db_schema.sql                   # SQL Schema ya SynapseDB (Mauombo/Vector Index)
+    └── vault_setup.sh                  # Script ya Kusanidi Zero-Trust Tokens 
